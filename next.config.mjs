@@ -8,6 +8,17 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
+  output: 'standalone',
+  trailingSlash: false,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 }
 
