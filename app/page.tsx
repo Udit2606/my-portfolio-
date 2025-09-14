@@ -215,12 +215,12 @@ function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="font-bold text-xl text-primary hover:scale-105 transition-transform cursor-pointer">
+          <div className="font-bold text-lg sm:text-xl text-primary hover:scale-105 transition-transform cursor-pointer">
             Portfolio
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -245,29 +245,32 @@ function Navigation() {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="hover:scale-110 transition-transform"
+              className="hover:scale-110 transition-transform touch-manipulation"
+              aria-label="Toggle navigation menu"
             >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-fade-in">
-            {navItems.map((item, index) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={`block py-2 text-sm font-medium transition-all duration-300 hover:text-primary hover:translate-x-2 ${
-                  activeSection === item.id ? "text-primary" : "text-muted-foreground"
-                }`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
+          <div className="md:hidden py-4 border-t border-border animate-fade-in bg-background/95 backdrop-blur-lg">
+            <div className="space-y-1">
+              {navItems.map((item, index) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className={`block py-3 px-4 text-base font-medium transition-all duration-300 hover:text-primary hover:translate-x-2 hover:bg-muted/50 rounded-lg ${
+                    activeSection === item.id ? "text-primary bg-muted/30" : "text-muted-foreground"
+                  }`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -281,46 +284,46 @@ function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden pt-20"
     >
       <ParticleBackground />
 
       <div
         className="max-w-4xl mx-auto text-center relative z-10"
-        style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+        style={{ transform: `translateY(${scrollY * 0.3}px)` }}
       >
         <div className="animate-fade-in-up">
-          <Avatar className="w-40 h-40 mx-auto mb-8 animate-float shadow-2xl ring-4 ring-primary/20">
+          <Avatar className="w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6 sm:mb-8 animate-float shadow-2xl ring-4 ring-primary/20">
             <AvatarImage src="/IMG_6655.jpg" alt="Profile" style={{ objectFit: 'cover' }} />
-            <AvatarFallback className="text-3xl font-bold bg-gradient-to-br from-primary to-primary/70 text-primary-foreground">
+            <AvatarFallback className="text-2xl sm:text-3xl font-bold bg-gradient-to-br from-primary to-primary/70 text-primary-foreground">
               UM
             </AvatarFallback>
           </Avatar>
         </div>
 
         <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-          <h1 className="text-5xl sm:text-7xl font-bold mb-6 text-balance text-foreground">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 text-balance text-foreground leading-tight">
             Hi, I'm{" "}
             <span className="text-primary bg-gradient-to-r from-primary to-primary/80 bg-clip-text">Udit Mittal</span>
           </h1>
-          <div className="text-2xl sm:text-3xl text-muted-foreground mb-8 h-12">
+          <div className="text-lg sm:text-2xl md:text-3xl text-muted-foreground mb-6 sm:mb-8 h-8 sm:h-12">
             <TypingAnimation
               texts={["Software Developer", "GenAI", "Problem Solver", "Creative Thinker"]}
               className="font-semibold"
             />
           </div>
-          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto text-pretty leading-relaxed">
+          <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-12 max-w-2xl mx-auto text-pretty leading-relaxed px-2">
             Motivated learner with a blend of technical skills and adaptability. Looking forward to contributing to projects that create real value.
           </p>
         </div>
 
         <div
-          className="animate-fade-in-up flex flex-col sm:flex-row gap-4 justify-center"
+          className="animate-fade-in-up flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
           style={{ animationDelay: "0.4s" }}
         >
           <Button
             size="lg"
-            className="group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-primary-foreground"
+            className="group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-primary-foreground touch-manipulation min-h-[48px] text-base"
             onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
           >
             View My Work
@@ -329,7 +332,7 @@ function HeroSection() {
           <Button
             variant="outline"
             size="lg"
-            className="group bg-transparent hover:bg-primary/5 border-2 hover:border-primary transition-all duration-300 hover:scale-105 text-foreground hover:text-primary"
+            className="group bg-transparent hover:bg-primary/5 border-2 hover:border-primary transition-all duration-300 hover:scale-105 text-foreground hover:text-primary touch-manipulation min-h-[48px] text-base"
             onClick={() => window.open("https://drive.google.com/file/d/1tjxkfNaiJKgzqHYYnYP9ICBgkSnrwJli/view?usp=drive_link", "_blank")}
           >
             <Download className="mr-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
@@ -344,88 +347,88 @@ function HeroSection() {
 
 function AboutSection() {
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 relative">
+    <section id="about" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
             <span className="text-primary bg-gradient-to-r from-primary to-primary/80 bg-clip-text">About Me</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty px-2">
             Learn more about my journey, skills, and what drives my passion for development.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
           <div className="animate-slide-in-left">
-            <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
-              <Code className="h-8 w-8 text-primary" />
+            <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 flex items-center gap-3">
+              <Code className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
               My Story
             </h3>
-            <div className="space-y-6 text-muted-foreground leading-relaxed">
-              <p className="text-lg">
+            <div className="space-y-4 sm:space-y-6 text-muted-foreground leading-relaxed">
+              <p className="text-base sm:text-lg">
                 A third-year B.Tech CSE student at VIT, passionate about technology, problem-solving, 
                 and continuous learning. I aim to apply my skills to real-world projects and grow as a professional.
               </p>
-              <p>
+              <p className="text-sm sm:text-base">
                 Summer Intern at Core Integra Global Services Pvt Ltd. – Developed a chatbot using Spring Boot, SQL, 
                 and API integration, while exploring OpenAI APIs and gaining corporate development exposure.
               </p>
-              <p>
+              <p className="text-sm sm:text-base">
                 When I'm not coding, you can find me exploring new design trends, contributing to open-source projects,
                 or mentoring aspiring developers in the community.
               </p>
             </div>
 
-            <div className="mt-8 space-y-4">
-              <div className="flex items-center gap-4 p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
-                <Calendar className="h-5 w-5 text-primary" />
-                <div>
-                  <div className="font-semibold">May 2025 - June 2025</div>
-                  <div className="text-sm text-muted-foreground">Summer Intern at Core Integra Global Services Pvt Ltd.</div>
+            <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
+              <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                <div className="min-w-0">
+                  <div className="font-semibold text-sm sm:text-base">May 2025 - June 2025</div>
+                  <div className="text-xs sm:text-sm text-muted-foreground">Summer Intern at Core Integra Global Services Pvt Ltd.</div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="animate-fade-in-up space-y-6">
-            <Card className="p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20">
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+          <div className="animate-fade-in-up space-y-4 sm:space-y-6">
+            <Card className="p-4 sm:p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20">
+              <CardHeader className="pb-3 sm:pb-4">
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-primary rounded-full animate-pulse"></div>
                   Current Role
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="p-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5">
-                  <h4 className="font-semibold mb-2 flex items-center gap-2">
-                    <Zap className="h-4 w-4 text-primary" />
+              <CardContent className="space-y-3 sm:space-y-4">
+                <div className="p-3 sm:p-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5">
+                  <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm sm:text-base">
+                    <Zap className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                     Perplexity Campus Partner
                   </h4>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Representing Perplexity AI on campus, promoting AI literacy and demonstrating cutting-edge AI tools to students and faculty.
                   </p>
                 </div>
                 <Separator />
-                <div className="p-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5">
-                  <h4 className="font-semibold mb-2 flex items-center gap-2">
-                    <Users className="h-4 w-4 text-primary" />
+                <div className="p-3 sm:p-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5">
+                  <h4 className="font-semibold mb-2 flex items-center gap-2 text-sm sm:text-base">
+                    <Users className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                     Internshala Student Partner
                   </h4>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Promoting Internshala's platform and opportunities among students, helping peers discover internships and skill development programs.
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            <div className="grid grid-cols-2 gap-4">
-              <Card className="p-4 text-center hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <Brain className="h-8 w-8 text-primary mx-auto mb-2" />
-                <h4 className="font-semibold">GenAI</h4>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <Card className="p-3 sm:p-4 text-center hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-primary mx-auto mb-2" />
+                <h4 className="font-semibold text-sm sm:text-base">GenAI</h4>
               </Card>
-              <Card className="p-4 text-center hover:shadow-lg transition-all duration-300 hover:scale-105">
-                <Code className="h-8 w-8 text-primary mx-auto mb-2" />
-                <h4 className="font-semibold">Development</h4>
+              <Card className="p-3 sm:p-4 text-center hover:shadow-lg transition-all duration-300 hover:scale-105">
+                <Code className="h-6 w-6 sm:h-8 sm:w-8 text-primary mx-auto mb-2" />
+                <h4 className="font-semibold text-sm sm:text-base">Development</h4>
               </Card>
             </div>
           </div>
@@ -438,32 +441,32 @@ function AboutSection() {
 function ProjectsSection() {
   const projects = [
     {
-      title: "E-Commerce Dashboard",
+      title: "Mittal Jewellers E-Commerce Platform",
       description:
-        "A comprehensive admin dashboard for managing online stores with real-time analytics, inventory management, and advanced reporting capabilities.",
-      image: "/modern-dashboard.png",
-      tags: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Chart.js"],
-      github: "#",
-      demo: "#",
+        "A modern, responsive ecommerce platform built with Next.js 14, featuring authentic Indian gold, silver, and diamond jewelry. The platform offers a seamless shopping experience with dark mode, cart functionality, and user authentication.",
+      image: "/Screenshot 2025-09-14 at 12.24.02.png",
+      tags: ["Next.js 14", "TypeScript", "Tailwind CSS", "Shadcn/UI", "React Context", "Dark Mode"],
+      github: "https://github.com/Udit2606/e-commece-platform",
+      demo: "https://mittaljewellers.vercel.app",
       featured: true,
     }
   ]
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/30">
+    <section id="projects" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/30">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
             <span className="text-primary bg-gradient-to-r from-primary to-primary/80 bg-clip-text">
               Featured Projects
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty px-2">
             A showcase of my recent work and personal projects that demonstrate my skills and creativity.
           </p>
         </div>
 
-        <div className="grid gap-8">
+        <div className="grid gap-6 sm:gap-8">
           {projects.map((project, index) => (
             <Card
               key={index}
@@ -475,27 +478,27 @@ function ProjectsSection() {
                 <img
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
-                  className="w-full h-64 md:h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-48 sm:h-64 md:h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
-                  <Badge className="bg-primary text-primary-foreground">Featured</Badge>
+                <div className="absolute top-3 right-3 sm:top-4 sm:right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
+                  <Badge className="bg-primary text-primary-foreground text-xs">Featured</Badge>
                 </div>
               </div>
 
-              <div className={`p-8 ${project.featured ? "md:order-2 flex flex-col justify-center" : ""}`}>
-                <CardHeader className="p-0 mb-4">
-                  <CardTitle className="text-2xl group-hover:text-primary transition-colors duration-300 flex items-center gap-2">
+              <div className={`p-4 sm:p-6 md:p-8 ${project.featured ? "md:order-2 flex flex-col justify-center" : ""}`}>
+                <CardHeader className="p-0 mb-3 sm:mb-4">
+                  <CardTitle className="text-xl sm:text-2xl group-hover:text-primary transition-colors duration-300 flex items-center gap-2">
                     {project.title}
-                    <ArrowRight className="h-5 w-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+                    <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
                   </CardTitle>
-                  <CardDescription className="text-pretty text-base leading-relaxed">
+                  <CardDescription className="text-pretty text-sm sm:text-base leading-relaxed">
                     {project.description}
                   </CardDescription>
                 </CardHeader>
 
                 <CardContent className="p-0">
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
                     {project.tags.map((tag, tagIndex) => (
                       <Badge
                         key={tagIndex}
@@ -507,18 +510,20 @@ function ProjectsSection() {
                     ))}
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                     <Button
                       size="sm"
                       variant="outline"
-                      className="flex-1 group/btn bg-transparent hover:bg-primary hover:text-primary-foreground transition-all duration-300 text-foreground"
+                      className="flex-1 group/btn bg-transparent hover:bg-primary hover:text-primary-foreground transition-all duration-300 text-foreground touch-manipulation min-h-[44px]"
+                      onClick={() => window.open(project.github, "_blank")}
                     >
                       <Github className="mr-2 h-4 w-4 group-hover/btn:rotate-12 transition-transform" />
                       Code
                     </Button>
                     <Button
                       size="sm"
-                      className="flex-1 group/btn bg-gradient-to-r from-primary to-primary/80 hover:shadow-lg text-primary-foreground"
+                      className="flex-1 group/btn bg-gradient-to-r from-primary to-primary/80 hover:shadow-lg text-primary-foreground touch-manipulation min-h-[44px]"
+                      onClick={() => window.open(project.demo, "_blank")}
                     >
                       <ExternalLink className="mr-2 h-4 w-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
                       Live Demo
@@ -546,39 +551,39 @@ function ExperiencesSection() {
   ]
 
   return (
-    <section id="experiences" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/30 to-background">
+    <section id="experiences" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/30 to-background">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
             <span className="text-primary bg-gradient-to-r from-primary to-primary/80 bg-clip-text">
               Work & Internship Experience
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty px-2">
             My professional journey and hands-on experiences in the tech industry.
           </p>
         </div>
 
-        <div className="grid gap-8">
+        <div className="grid gap-6 sm:gap-8">
           {experiences.map((experience, index) => (
             <Card
               key={index}
               className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20"
             >
-              <CardContent className="p-8">
-                <div className="flex items-start gap-6">
-                  <div className="p-3 rounded-lg bg-primary/10 text-primary flex-shrink-0">
+              <CardContent className="p-4 sm:p-6 md:p-8">
+                <div className="flex items-start gap-4 sm:gap-6">
+                  <div className="p-2 sm:p-3 rounded-lg bg-primary/10 text-primary flex-shrink-0">
                     {experience.icon}
                   </div>
-                  <div className="flex-1">
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-                      <h3 className="text-2xl font-bold text-foreground">{experience.title}</h3>
-                      <span className="text-sm text-muted-foreground bg-muted/50 px-3 py-1 rounded-full">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3 sm:mb-4">
+                      <h3 className="text-xl sm:text-2xl font-bold text-foreground">{experience.title}</h3>
+                      <span className="text-xs sm:text-sm text-muted-foreground bg-muted/50 px-2 sm:px-3 py-1 rounded-full self-start sm:self-auto">
                         {experience.duration}
                       </span>
                     </div>
-                    <h4 className="text-xl font-semibold text-primary mb-3">{experience.company}</h4>
-                    <p className="text-muted-foreground leading-relaxed">{experience.description}</p>
+                    <h4 className="text-lg sm:text-xl font-semibold text-primary mb-2 sm:mb-3">{experience.company}</h4>
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{experience.description}</p>
                   </div>
                 </div>
               </CardContent>
@@ -618,37 +623,39 @@ function SkillsSection() {
   ]
 
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
             <span className="text-primary bg-gradient-to-r from-primary to-primary/80 bg-clip-text">
               Skills & Technologies
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty px-2">
             The tools and technologies I use to bring ideas to life, with proficiency levels.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {skillCategories.map((category, index) => (
             <Card
               key={index}
-              className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20"
+              className={`hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20 ${
+                category.title === "Tools" ? "sm:col-span-2 lg:col-span-1" : ""
+              }`}
             >
-              <CardHeader className="text-center pb-4">
-                <div className="flex items-center justify-center gap-3 mb-2">
+              <CardHeader className={`text-center pb-3 sm:pb-4 ${category.title === "Tools" ? "pb-2" : ""}`}>
+                <div className="flex items-center justify-center gap-2 sm:gap-3 mb-2">
                   <div className="p-2 rounded-lg bg-primary/10 text-primary">{category.icon}</div>
-                  <CardTitle className="text-xl">{category.title}</CardTitle>
+                  <CardTitle className="text-lg sm:text-xl">{category.title}</CardTitle>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className={`space-y-3 sm:space-y-4 ${category.title === "Tools" ? "space-y-2" : ""}`}>
                 {category.skills.map((skill, skillIndex) => (
                   <div key={skillIndex} className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">{skill.name}</span>
-                      <span className="text-xs text-muted-foreground">{skill.level}%</span>
+                      <span className="text-xs sm:text-sm font-medium truncate pr-2">{skill.name}</span>
+                      <span className="text-xs text-muted-foreground flex-shrink-0">{skill.level}%</span>
                     </div>
                     <Progress value={skill.level} className="h-2 bg-muted" />
                   </div>
@@ -685,68 +692,68 @@ function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/30">
+    <section id="contact" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/30">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-foreground">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-foreground">
             <span className="text-primary bg-gradient-to-r from-primary to-primary/80 bg-clip-text">
               Let's Work Together
             </span>
           </h2>
-          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto text-pretty">
+          <p className="text-base sm:text-lg text-muted-foreground mb-8 sm:mb-12 max-w-2xl mx-auto text-pretty px-2">
             I'm always interested in new opportunities and exciting projects. Let's discuss how we can bring your ideas
             to life.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-12">
           {/* Contact Info */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <div>
-              <h3 className="text-2xl font-bold mb-6">Get In Touch</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
-                  <Mail className="h-5 w-5 text-primary" />
-                  <div>
-                    <div className="font-semibold">Email</div>
-                    <div className="text-sm text-muted-foreground">meet.uditmittal@gmail.com</div>
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Get In Touch</h3>
+              <div className="space-y-3 sm:space-y-4">
+                <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                  <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                  <div className="min-w-0">
+                    <div className="font-semibold text-sm sm:text-base">Email</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground break-all">meet.uditmittal@gmail.com</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
-                  <MapPin className="h-5 w-5 text-primary" />
-                  <div>
-                    <div className="font-semibold">Location</div>
-                    <div className="text-sm text-muted-foreground">Saharanpur, Uttar Pradesh</div>
+                <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                  <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                  <div className="min-w-0">
+                    <div className="font-semibold text-sm sm:text-base">Location</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Saharanpur, Uttar Pradesh</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button
                 size="lg"
-                className="group bg-gradient-to-r from-primary to-primary/80 hover:shadow-lg text-primary-foreground"
+                className="group bg-gradient-to-r from-primary to-primary/80 hover:shadow-lg text-primary-foreground touch-manipulation min-h-[48px]"
                 onClick={() => window.open("https://www.linkedin.com/in/meetudit", "_blank")}
               >
-                <Linkedin className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                <Linkedin className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:scale-110 transition-transform" />
                 LinkedIn
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="group bg-transparent hover:bg-primary/5 text-foreground hover:text-primary"
+                className="group bg-transparent hover:bg-primary/5 text-foreground hover:text-primary touch-manipulation min-h-[48px]"
                 onClick={() => window.open("https://github.com/Udit2606", "_blank")}
               >
-                <Github className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
+                <Github className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:rotate-12 transition-transform" />
                 GitHub
               </Button>
             </div>
           </div>
 
           {/* Contact Form */}
-          <Card className="p-8 hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/20">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
+          <Card className="p-4 sm:p-6 md:p-8 hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/20">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
                     Name
@@ -757,7 +764,7 @@ function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your name"
-                    className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
+                    className="transition-all duration-300 focus:ring-2 focus:ring-primary/20 touch-manipulation min-h-[44px]"
                     required
                   />
                 </div>
@@ -772,7 +779,7 @@ function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your.email@gmail.com"
-                    className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
+                    className="transition-all duration-300 focus:ring-2 focus:ring-primary/20 touch-manipulation min-h-[44px]"
                     required
                   />
                 </div>
@@ -787,7 +794,7 @@ function ContactSection() {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="Query"
-                  className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
+                  className="transition-all duration-300 focus:ring-2 focus:ring-primary/20 touch-manipulation min-h-[44px]"
                   required
                 />
               </div>
@@ -801,17 +808,17 @@ function ContactSection() {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Tell me about your query..."
-                  rows={5}
-                  className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
+                  rows={4}
+                  className="transition-all duration-300 focus:ring-2 focus:ring-primary/20 touch-manipulation resize-none"
                   required
                 />
               </div>
               <Button
                 type="submit"
                 size="lg"
-                className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:shadow-lg text-primary-foreground"
+                className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:shadow-lg text-primary-foreground touch-manipulation min-h-[48px]"
               >
-                <Send className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <Send className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                 Send Message
               </Button>
             </form>
@@ -824,70 +831,69 @@ function ContactSection() {
 
 function Footer() {
   return (
-    <footer className="py-12 px-4 sm:px-6 lg:px-8 border-t border-border bg-muted/30">
+    <footer className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 border-t border-border bg-muted/30">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <h3 className="font-bold text-xl mb-4 text-primary">Udit Mittal</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <h3 className="font-bold text-lg sm:text-xl mb-3 sm:mb-4 text-primary">Udit Mittal</h3>
+            <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
               Software Developer, passionate about creating exceptional digital experiences.
             </p>
           </div>
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <div className="space-y-2 text-sm">
-              <a href="#about" className="block text-muted-foreground hover:text-primary transition-colors">
+            <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Quick Links</h4>
+            <div className="space-y-2 text-xs sm:text-sm">
+              <a href="#about" className="block text-muted-foreground hover:text-primary transition-colors touch-manipulation py-1">
                 About
               </a>
-              <a href="#projects" className="block text-muted-foreground hover:text-primary transition-colors">
+              <a href="#projects" className="block text-muted-foreground hover:text-primary transition-colors touch-manipulation py-1">
                 Projects
               </a>
-              <a href="#skills" className="block text-muted-foreground hover:text-primary transition-colors">
+              <a href="#skills" className="block text-muted-foreground hover:text-primary transition-colors touch-manipulation py-1">
                 Skills
               </a>
-              <a href="#contact" className="block text-muted-foreground hover:text-primary transition-colors">
+              <a href="#contact" className="block text-muted-foreground hover:text-primary transition-colors touch-manipulation py-1">
                 Contact
               </a>
             </div>
           </div>
-          <div>
-            <h4 className="font-semibold mb-4">Connect</h4>
-            <div className="flex gap-4">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <h4 className="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Connect</h4>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
               <Button 
-                size="lg" 
-                className="group"
+                size="sm"
+                className="group bg-gradient-to-r from-primary to-primary/80 text-primary-foreground touch-manipulation min-h-[40px] text-xs sm:text-sm"
                 onClick={() => window.location.href = "mailto:meet.uditmittal@gmail.com"}
               >
-                <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
+                <Mail className="mr-2 h-3 w-3 sm:h-4 sm:w-4 group-hover:rotate-12 transition-transform" />
                 Send Email
               </Button>
               <Button 
                 variant="outline" 
-                size="lg" 
-                className="group bg-transparent text-foreground hover:text-primary"
+                size="sm"
+                className="group bg-transparent text-foreground hover:text-primary touch-manipulation min-h-[40px] text-xs sm:text-sm"
                 onClick={() => window.open("https://www.linkedin.com/in/meetudit", "_blank")}
               >
-                <Linkedin className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                <Linkedin className="mr-2 h-3 w-3 sm:h-4 sm:w-4 group-hover:scale-110 transition-transform" />
                 LinkedIn
               </Button>
               <Button 
                 variant="outline" 
-                size="lg" 
-                className="group bg-transparent text-foreground hover:text-primary"
+                size="sm"
+                className="group bg-transparent text-foreground hover:text-primary touch-manipulation min-h-[40px] text-xs sm:text-sm"
                 onClick={() => window.open("https://github.com/Udit2606", "_blank")}
               >
-                <Github className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
+                <Github className="mr-2 h-3 w-3 sm:h-4 sm:w-4 group-hover:rotate-12 transition-transform" />
                 GitHub
               </Button>
             </div>
           </div>
         </div>
 
-        <Separator className="mb-8" />
+        <Separator className="mb-6 sm:mb-8" />
 
-        <div className="text-center text-sm text-muted-foreground">
+        <div className="text-center text-xs sm:text-sm text-muted-foreground">
           <p>&copy; 2025 Udit Mittal. All rights reserved.</p>
-          <p className="mt-2">Built with Next.js, Tailwind CSS, and lots of ☕</p>
         </div>
       </div>
     </footer>
@@ -896,7 +902,7 @@ function Footer() {
 
 export default function Portfolio() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
       <div className="min-h-screen bg-background">
         <Navigation />
         <HeroSection />
