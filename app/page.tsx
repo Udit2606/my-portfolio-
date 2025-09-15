@@ -33,7 +33,6 @@ import {
   Award,
   Brain,
 } from "lucide-react"
-import { ThemeProvider } from "@/components/theme-provider"
 import { useTheme } from "next-themes"
 
 function ParticleBackground() {
@@ -333,7 +332,7 @@ function HeroSection() {
             variant="outline"
             size="lg"
             className="group bg-transparent hover:bg-primary/5 border-2 hover:border-primary transition-all duration-300 hover:scale-105 text-foreground hover:text-primary touch-manipulation min-h-[48px] text-base"
-            onClick={() => window.open("https://drive.google.com/file/d/1tjxkfNaiJKgzqHYYnYP9ICBgkSnrwJli/view?usp=drive_link", "_blank")}
+            onClick={() => window.open("https://drive.google.com/file/d/1pAv4S3oGe6IPRNjW9RI8VGOIPQtFVpDI/view?usp=drive_link", "_blank")}
           >
             <Download className="mr-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
             Download CV
@@ -677,11 +676,43 @@ function ContactSection() {
     subject: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log("Form submitted:", formData)
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    try {
+      // Create mailto link as fallback
+      const subject = encodeURIComponent(formData.subject || 'Contact from Portfolio')
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )
+      const mailtoLink = `mailto:uditmittal2606@gmail.com?subject=${subject}&body=${body}`
+      
+      // Open email client
+      window.location.href = mailtoLink
+      
+      // Reset form after successful submission
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      })
+      setSubmitStatus('success')
+      
+      // Reset success message after 3 seconds
+      setTimeout(() => setSubmitStatus('idle'), 3000)
+    } catch (error) {
+      console.error('Error sending message:', error)
+      setSubmitStatus('error')
+      setTimeout(() => setSubmitStatus('idle'), 3000)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -816,11 +847,38 @@ function ContactSection() {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:shadow-lg text-primary-foreground touch-manipulation min-h-[48px]"
+                disabled={isSubmitting}
+                className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:shadow-lg text-primary-foreground touch-manipulation min-h-[48px] disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Send className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <div className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
+                    Send Message
+                  </>
+                )}
               </Button>
+              
+              {/* Status Messages */}
+              {submitStatus === 'success' && (
+                <div className="mt-4 p-3 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-md">
+                  <p className="text-green-800 dark:text-green-200 text-sm">
+                    ✅ Message sent! Your email client should open with the message ready to send.
+                  </p>
+                </div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <div className="mt-4 p-3 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-md">
+                  <p className="text-red-800 dark:text-red-200 text-sm">
+                    ❌ There was an error sending your message. Please try again or contact me directly.
+                  </p>
+                </div>
+              )}
             </form>
           </Card>
         </div>
@@ -902,17 +960,15 @@ function Footer() {
 
 export default function Portfolio() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-      <div className="min-h-screen bg-background">
-        <Navigation />
-        <HeroSection />
-        <AboutSection />
-        <ProjectsSection />
-        <ExperiencesSection />
-        <SkillsSection />
-        <ContactSection />
-        <Footer />
-      </div>
-    </ThemeProvider>
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      <HeroSection />
+      <AboutSection />
+      <ProjectsSection />
+      <ExperiencesSection />
+      <SkillsSection />
+      <ContactSection />
+      <Footer />
+    </div>
   )
 }
