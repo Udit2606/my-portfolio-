@@ -332,7 +332,7 @@ function HeroSection() {
             variant="outline"
             size="lg"
             className="group bg-transparent hover:bg-primary/5 border-2 hover:border-primary transition-all duration-300 hover:scale-105 text-foreground hover:text-primary touch-manipulation min-h-[48px] text-base"
-            onClick={() => window.open("https://drive.google.com/file/d/1pAv4S3oGe6IPRNjW9RI8VGOIPQtFVpDI/view?usp=drive_link", "_blank")}
+            onClick={() => window.open("https://drive.google.com/file/d/1UGXIQcVj5-iilieX3C2_-dEqQIGGvnc5/view?usp=sharing", "_blank")}
           >
             <Download className="mr-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
             Download CV

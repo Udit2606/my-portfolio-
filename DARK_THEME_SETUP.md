@@ -154,3 +154,5 @@ if (localStorage.theme === 'light') {
 - 📱 **Mobile optimized** - Works on all devices
 
 **Ready for deployment!** Your portfolio will look amazing in dark theme for all visitors! 🚀
+
+
